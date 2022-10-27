@@ -5,9 +5,9 @@
 //  Created by Tatan.
 //
 
-import web3swift
+import Go23Web3Swift
 
-public typealias EthereumAddress_fromWeb3SwiftPod = web3swift.EthereumAddress
+public typealias EthereumAddress_fromWeb3SwiftPod = Go23Web3Swift.EthereumAddress
 extension EthereumAddress_fromWeb3SwiftPod: CustomStringConvertible {
     public var description: String {
         return address

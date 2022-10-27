@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DerbyWalletCore
+import Go23WalletCore
 
 public class InMemoryAddressStorage: AddressStorage {
     private var cache: AtomicDictionary<AddressKey, DerbyWallet.Address>

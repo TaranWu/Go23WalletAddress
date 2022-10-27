@@ -1,7 +1,7 @@
 // Copyright © 2018 Stormbird PTE. LTD.
 
 import Foundation
-import TrustKeystore
+import Go23TrustKeystore
 
 extension DerbyWallet.Address {
     //TODO multiple versions of init() that accept address types from other libraries goes here. Anymore?
@@ -9,7 +9,7 @@ extension DerbyWallet.Address {
         self = .ethereumAddress(eip55String: address.address)
     }
 
-    public init(address: TrustKeystore.Address) {
+    public init(address: Go23TrustKeystore.Address) {
         self = .ethereumAddress(eip55String: address.eip55String)
     }
 
@@ -43,7 +43,7 @@ extension EthereumAddress_fromWeb3SwiftPod {
     }
 }
 
-extension TrustKeystore.Address {
+extension Go23TrustKeystore.Address {
     public init(address: DerbyWallet.Address) {
         self.init(uncheckedAgainstNullAddress: address.eip55String)!
     }

@@ -122,7 +122,7 @@ public extension AtomicArray {
 
     mutating func removeFirstIfExist(where shouldBeRemoved: (AtomicArray.Element) throws -> Bool) {
         _wait(); defer { _signal() }
-        guard let index = try? array.firstIndex(where: shouldBeRemoved), let index = index else { return }
+        guard let index = try? array.firstIndex(where: shouldBeRemoved) else { return }
         array.remove(at: index)
     }
 

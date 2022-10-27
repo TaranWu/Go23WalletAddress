@@ -8,14 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Go23WalletAddress'
-  s.version          = '0.1.0'
+  s.version          = '1.0.0'
   s.summary          = 'Go23Wallet Address library'
 
   s.description      = 'Go23Wallet Address functionality'
-  s.homepage         = 'https://github.com/Taran/Go23WalletAddress'
+  s.homepage         = '  https://github.com/TaranWu/Go23WalletAddress'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Taran' => 'NA' }
-  s.source           = { :git => 'https://github.com/Taran/Go23WalletAddress.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/TaranWu/Go23WalletAddress.git', :tag => s.version.to_s }
   
   s.ios.deployment_target = '13.0'
   s.swift_version    = '5.0'
@@ -24,10 +24,11 @@ Pod::Spec.new do |s|
   
   s.frameworks       = 'Foundation'
 
-#  s.dependency 'TrustKeystore'
-#  s.dependency 'web3swift'
-#  s.dependency 'EthereumAddress'
-#  s.dependency 'Go23WalletCore'
+  s.dependency 'Alamofire'
+  s.dependency 'Go23TrustKeystore'
+  s.dependency 'Go23Web3Swift'
+  s.dependency 'Go23EthereumAddress'
+  s.dependency 'Go23WalletCore'
   
   # s.resource_bundles = {
   #   'Go23WalletAddress' => ['Go23WalletAddress/Assets/*.png']

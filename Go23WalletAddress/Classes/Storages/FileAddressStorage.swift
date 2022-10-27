@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import DerbyWalletCore
+import Go23WalletCore
 
 public class FileAddressStorage: AddressStorage {
     private var lastCount: Int
