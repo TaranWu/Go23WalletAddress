@@ -16,7 +16,7 @@ public class FileAddressStorage: AddressStorage {
     private let fileName: String
     private let dropToPersistentStorageThreshold: Int = 1000
 
-    public subscript(key: AddressKey) -> DerbyWallet.Address? {
+    public subscript(key: AddressKey) -> Go23Wallet.Address? {
         get { inMemoryStorage[key] }
         set { addOrUpdate(address: newValue, for: key) }
     }
@@ -28,7 +28,7 @@ public class FileAddressStorage: AddressStorage {
         self.fileName = fileName
         self.persistentStorage = persistentStorage
 
-        let snapshot: [String: DerbyWallet.Address] = persistentStorage.load(forKey: fileName, defaultValue: [:])
+        let snapshot: [String: Go23Wallet.Address] = persistentStorage.load(forKey: fileName, defaultValue: [:])
         inMemoryStorage = .init(values: snapshot)
         lastCount = snapshot.count
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: .main) { _ in
@@ -36,7 +36,7 @@ public class FileAddressStorage: AddressStorage {
         }
     }
 
-    private func addOrUpdate(address: DerbyWallet.Address?, for key: String) {
+    private func addOrUpdate(address: Go23Wallet.Address?, for key: String) {
         inMemoryStorage[key] = address
 
         if inMemoryStorage.count - lastCount > dropToPersistentStorageThreshold {
@@ -45,7 +45,7 @@ public class FileAddressStorage: AddressStorage {
         }
     }
 
-    private func persist(_ values: [String: DerbyWallet.Address]) {
+    private func persist(_ values: [String: Go23Wallet.Address]) {
         guard let data = try? JSONEncoder().encode(values) else { return }
 
         persistentStorage.setData(data, forKey: fileName)

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Go23WalletAddress'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Go23Wallet Address library'
 
   s.description      = 'Go23Wallet Address functionality'
@@ -24,7 +24,6 @@ Pod::Spec.new do |s|
   
   s.frameworks       = 'Foundation'
 
-  s.dependency 'Alamofire'
   s.dependency 'Go23TrustKeystore'
   s.dependency 'Go23Web3Swift'
   s.dependency 'Go23EthereumAddress'

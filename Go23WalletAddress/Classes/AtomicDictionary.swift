@@ -28,7 +28,7 @@ public class AtomicDictionary<Key: Hashable, Value> {
         }
     }
     
-    public init(queue: DispatchQueue = DispatchQueue(label: "org.DerbyWallet.swift.atomicDictionary", qos: .background), value: [Key: Value] = [:]) {
+    public init(queue: DispatchQueue = DispatchQueue(label: "org.Go23Walletswift.atomicDictionary", qos: .background), value: [Key: Value] = [:]) {
         self.queue = queue
         self.cache = value
     }

@@ -5,10 +5,10 @@ import Go23TrustKeystore
 import Go23WalletCore
 
 ///Use an enum as a namespace until Swift has proper namespaces
-public enum DerbyWallet {}
+public enum Go23Wallet {}
 
 //TODO move this to a standard alone internal Pod with 0 external dependencies so main app and TokenScript can use it?
-extension DerbyWallet {
+extension Go23Wallet {
     public enum Address: Hashable, Codable {
         case ethereumAddress(eip55String: String)
 
@@ -89,17 +89,17 @@ extension DerbyWallet {
             return eip55String.drop0x.lowercased() == contract.drop0x.lowercased()
         }
 
-        public func sameContract(as contract: DerbyWallet.Address) -> Bool {
+        public func sameContract(as contract: Go23Wallet.Address) -> Bool {
             return eip55String == contract.eip55String
         }
     }
 }
 
-extension DerbyWallet.Address {
+extension Go23Wallet.Address {
     struct Functional {}
 }
 
-fileprivate extension DerbyWallet.Address.Functional {
+fileprivate extension Go23Wallet.Address.Functional {
     //TODO Should exploring using secp256k1_ec_seckey_verify() instead
     static func validatePrivateKey(_ privateKey: Data) -> Bool {
         //See https://en.bitcoin.it/wiki/Secp256k1 for n, order of curve
@@ -119,14 +119,14 @@ fileprivate extension DerbyWallet.Address.Functional {
     }
 }
 
-extension DerbyWallet.Address: CustomStringConvertible {
+extension Go23Wallet.Address: CustomStringConvertible {
     //TODO should not be using this in production code
     public var description: String {
         return eip55String
     }
 }
 
-extension DerbyWallet.Address: CustomDebugStringConvertible {
+extension Go23Wallet.Address: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case .ethereumAddress(let eip55String):
@@ -135,17 +135,17 @@ extension DerbyWallet.Address: CustomDebugStringConvertible {
     }
 }
 
-extension DerbyWallet.Address {
-    private static func deriveEthereumAddress(fromPublicKey publicKey: Data) -> DerbyWallet.Address {
+extension Go23Wallet.Address {
+    private static func deriveEthereumAddress(fromPublicKey publicKey: Data) -> Go23Wallet.Address {
         precondition(publicKey.count == 65, "Expect 64-byte public key")
         precondition(publicKey[0] == 4, "Invalid public key")
         let sha3 = publicKey[1...].sha3(.keccak256)
         let eip55String = sha3[12..<32].hex()
-        return DerbyWallet.Address(string: eip55String)!
+        return Go23Wallet.Address(string: eip55String)!
     }
 }
 
-extension DerbyWallet.Address {
+extension Go23Wallet.Address {
     //Produces this format: 0x1234…5678
     public var truncateMiddle: String {
         let address = eip55String

@@ -3,7 +3,7 @@
 import Foundation
 import Go23TrustKeystore
 
-extension DerbyWallet.Address {
+extension Go23Wallet.Address {
     //TODO multiple versions of init() that accept address types from other libraries goes here. Anymore?
     public init(address: EthereumAddress_fromWeb3SwiftPod) {
         self = .ethereumAddress(eip55String: address.address)
@@ -14,7 +14,7 @@ extension DerbyWallet.Address {
     }
 
     public init?(possibleAddress: Any?) {
-        if let address = possibleAddress as? DerbyWallet.Address {
+        if let address = possibleAddress as? Go23Wallet.Address {
             self = address
         } else if let address = possibleAddress as? EthereumAddress_fromEthereumAddressPod {
             self = .ethereumAddress(eip55String: address.address)
@@ -31,7 +31,7 @@ extension DerbyWallet.Address {
 }
 
 extension EthereumAddress_fromWeb3SwiftPod {
-    public init(address: DerbyWallet.Address) {
+    public init(address: Go23Wallet.Address) {
         //EthereumAddress(Data) is much faster than EthereumAddress(String). This is significant because we can make a few hundred calls
 //        let data = Data.fromHex(address.eip55String)!
 //        self.init(data)!
@@ -44,7 +44,7 @@ extension EthereumAddress_fromWeb3SwiftPod {
 }
 
 extension Go23TrustKeystore.Address {
-    public init(address: DerbyWallet.Address) {
+    public init(address: Go23Wallet.Address) {
         self.init(uncheckedAgainstNullAddress: address.eip55String)!
     }
 }
