@@ -28,7 +28,7 @@ public class AtomicDictionary<Key: Hashable, Value> {
         }
     }
     
-    public init(queue: DispatchQueue = DispatchQueue(label: "org.Go23Walletswift.atomicDictionary", qos: .background), value: [Key: Value] = [:]) {
+    public init(queue: DispatchQueue = DispatchQueue(label: "org.go23wallet.swift.atomicDictionary", qos: .background), value: [Key: Value] = [:]) {
         self.queue = queue
         self.cache = value
     }
@@ -68,6 +68,14 @@ public class AtomicDictionary<Key: Hashable, Value> {
         }
 
         return elements
+    }
+
+    public func removeAll(body: (_ key: Key) -> Bool) {
+        dispatchPrecondition(condition: .notOnQueue(queue))
+        queue.sync { [unowned self] in
+            let items = self.cache.filter { body($0.key) }
+            items.forEach { self.cache.removeValue(forKey: $0.key) }
+        }
     }
 
     public func forEach(body: ((key: Key, value: Value)) -> Void) {
